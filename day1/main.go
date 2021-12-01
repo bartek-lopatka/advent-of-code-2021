@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	counter := 0
+	counterPart1 := 0
+	counterPart2 := 0
 	//previous := 0
 	var lines []int
 	input, err := os.Open("input.txt")
@@ -27,11 +28,21 @@ func main() {
 
 	}
 
+	// part one
 	for i := 1; i < len(lines); i++ {
 		if lines[i] > lines[i-1] {
-			counter++
+			counterPart1++
 		}
 	}
-	fmt.Println("it's a final counter to to ru to")
-	fmt.Println(counter)
+
+	//part two
+	for i := 0; i < len(lines)-3; i++ {
+		if lines[i]+lines[i+1]+lines[i+2] < lines[i+1]+lines[i+2]+lines[i+3] {
+			counterPart2++
+		}
+	}
+	fmt.Println("it's a final counter for part1 to to ru to")
+	fmt.Println(counterPart1)
+	fmt.Println("it's a final counter for part2 to to ru to")
+	fmt.Println(counterPart2)
 }

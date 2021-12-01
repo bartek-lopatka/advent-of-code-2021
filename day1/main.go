@@ -9,8 +9,9 @@ import (
 )
 
 func main() {
-	counter := -1
-	previous := 0
+	counter := 0
+	//previous := 0
+	var lines []int
 	input, err := os.Open("input.txt")
 
 	if err != nil {
@@ -21,14 +22,15 @@ func main() {
 	scanner := bufio.NewScanner(input)
 
 	for scanner.Scan() {
-		//fmt.Println(scanner.Text())
-		next, _ := strconv.Atoi(scanner.Text())
-		if next > previous {
+		item, _ := strconv.Atoi(scanner.Text())
+		lines = append(lines, item)
+
+	}
+
+	for i := 1; i < len(lines); i++ {
+		if lines[i] > lines[i-1] {
 			counter++
 		}
-		fmt.Printf("old previous: %s\n", previous)
-		previous = next
-		fmt.Printf("new previous: %s\n", previous)
 	}
 	fmt.Println("it's a final counter to to ru to")
 	fmt.Println(counter)

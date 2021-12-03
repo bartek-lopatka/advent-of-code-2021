@@ -11,6 +11,7 @@ import (
 func main() {
 	horizontal := 0
 	depth := 0
+	aim := 0
 	d, err := os.ReadFile("input.txt")
 	if err != nil {
 		log.Panic("input file not found.")
@@ -22,11 +23,15 @@ func main() {
 		if strings.HasPrefix(s[i], "forward") {
 			move := s[i]
 			stringNumber := move[len(move)-1:]
-			intNumber, err := strconv.Atoi(stringNumber)
+			forward, err := strconv.Atoi(stringNumber)
 			if err != nil {
 				log.Panic("input is not an int!")
 			}
-			horizontal += intNumber
+
+			horizontal += forward
+			if aim != 0 {
+				depth = depth + (forward * aim)
+			}
 
 		}
 
@@ -37,7 +42,8 @@ func main() {
 			if err != nil {
 				log.Panic("input is not an int!")
 			}
-			depth += intNumber
+
+			aim += intNumber
 
 		}
 
@@ -48,7 +54,8 @@ func main() {
 			if err != nil {
 				log.Panic("input is not an int!")
 			}
-			depth -= intNumber
+
+			aim -= intNumber
 
 		}
 	}
